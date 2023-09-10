@@ -132,6 +132,12 @@
 
             pkgsKernelCross.gcc13Stdenv.cc
             gcc
+
+            # For linting nix code
+            nil
+
+            # For linting shell/bash
+            shellcheck
           ]
           ++ pkgs.linux.nativeBuildInputs);
         runScript = pkgs.writeScript "init.sh" ''
