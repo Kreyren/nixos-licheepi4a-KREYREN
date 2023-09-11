@@ -139,7 +139,7 @@
             # For linting shell/bash
             shellcheck
           ]
-          ++ pkgs.linux.nativeBuildInputs);
+          ++ pkgs_.linux.nativeBuildInputs);
         runScript = pkgs.writeScript "init.sh" ''
           # set the cross-compilation environment variables.
           export CROSS_COMPILE=riscv64-unknown-linux-gnu-
