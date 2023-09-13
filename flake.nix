@@ -115,7 +115,7 @@
     };
 
     # use `nix develop .#fhsEnv` to enter the fhs test environment defined here.
-    devShells.x86_64-linux.fhsEnv = let
+    devShells.x86_64-linux.default = let
       pkgs = import nixpkgs {
         system = "x86_64-linux";
       };
@@ -132,8 +132,14 @@
 
             pkgsKernelCross.gcc13Stdenv.cc
             gcc
+
+            # For linting nix code
+            nil
+
+            # For linting shell/bash
+            shellcheck
           ]
-          ++ pkgs.linux.nativeBuildInputs);
+          ++ pkgs_.linux.nativeBuildInputs);
         runScript = pkgs.writeScript "init.sh" ''
           # set the cross-compilation environment variables.
           export CROSS_COMPILE=riscv64-unknown-linux-gnu-
@@ -145,8 +151,6 @@
           #   https://github.com/graysky2/kernel_compiler_patch#alternative-way-to-define-a--march-option-without-this-patch
           export KCFLAGS=' -march=rv64gc -mabi=lp64d'
           export KCPPFLAGS=' -march=rv64gc -mabi=lp64d'
-
-          exec bash
         '';
       })
       .env;

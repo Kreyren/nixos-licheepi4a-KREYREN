@@ -17,3 +17,6 @@ outputs/
 *.zst
 
 **/.DS_Store
+
+# Ignore vscode directory to allow temporary user configurations
+.vscode/
